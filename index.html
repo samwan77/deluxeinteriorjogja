@@ -594,9 +594,8 @@
             // 3. Panggil webhook Make.com
             fetch('https://hook.eu1.make.com/pfs0mhms37rx6gabyf1qu8qgkbcg9wzf', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                // Kita menghapus header 'Content-Type': 'application/json'
+                // Ini adalah trik agar browser TIDAK memblokir pengiriman karena masalah CORS (Cross-Origin)
                 body: JSON.stringify(dataYangDikirim)
             })
             .then(response => {
