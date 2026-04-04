@@ -591,21 +591,17 @@
                 nowa: document.getElementById('inputWa').value
             };
 
-            // 3. Panggil webhook Make.com
+            // 3. Panggil webhook Make.com dengan mode no-cors
             fetch('https://hook.eu1.make.com/pfs0mhms37rx6gabyf1qu8qgkbcg9wzf', {
                 method: 'POST',
-                // Kita menghapus header 'Content-Type': 'application/json'
-                // Ini adalah trik agar browser TIDAK memblokir pengiriman karena masalah CORS (Cross-Origin)
+                mode: 'no-cors',
                 body: JSON.stringify(dataYangDikirim)
             })
-            .then(response => {
-                if (response.ok) {
-                    // 4. Kalau sukses, kasih notifikasi dan kosongin form
-                    alert('Terima kasih! Konsultasi Anda telah diterima. Tim kami akan segera menghubungi Anda.');
-                    document.getElementById('vipForm').reset();
-                } else {
-                    alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
-                }
+            .then(() => {
+                // Dalam mode no-cors, browser tidak akan memblokir request.
+                // Respons tidak bisa dibaca, jadi kita selalu mengasumsikan success saat janji (promise) terpenuhi.
+                alert('Terima kasih! Konsultasi Anda telah diterima. Tim kami akan segera menghubungi Anda.');
+                document.getElementById('vipForm').reset();
             })
             .catch(error => {
                 console.error('Error:', error);
