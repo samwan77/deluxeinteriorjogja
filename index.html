@@ -994,7 +994,7 @@
                             source.removeAttribute('data-src'); // cegah double load
                             video.load();
                             // Safari iOS butuh interaksi user; tangkap error diam-diam
-                            video.play().catch(() => {});
+                            video.play().catch(() => { });
                         }
                         observer.unobserve(video);
                     }
